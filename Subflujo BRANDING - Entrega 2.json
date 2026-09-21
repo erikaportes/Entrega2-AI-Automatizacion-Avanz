@@ -1,0 +1,275 @@
+{
+  "name": "Subflujo BRANDING - Entrega 2",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "jsonExample",
+        "jsonExample": "{\n  \"text\": \"a string\",\n  \"tel\":\"1122334455\"\n}"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -784,
+        -80
+      ],
+      "id": "59885578-ce02-451c-93df-cbc20ae87c74",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"status\": \"error\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        -32,
+        32
+      ],
+      "id": "137577ad-8e04-412d-a8a4-6499a1912094",
+      "name": "Error Branding"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Documento con la base de conocimiento oficial de estrategia de Ni@ Digital Brand: metodologías, marcos de trabajo, lineamientos y mejores prácticas de marketing digital. Úsala para fundamentar recomendaciones estratégicas generales.",
+        "operation": "get",
+        "documentURL": "1PoWAHkKytgV21Rb-pO074AEjxH3myv1UyunW_WtEj3w"
+      },
+      "type": "n8n-nodes-base.googleDocsTool",
+      "typeVersion": 2,
+      "position": [
+        -192,
+        192
+      ],
+      "id": "6924f78a-a855-493a-bd55-6e6accefd6c9",
+      "name": "Base conocimiento - Branding1",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "uljkKrmO7yyA8u9a",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Hoja de cálculo con información actualizada de marcas y clientes específicos: identidad visual, público objetivo, posicionamiento. Úsala siempre que el usuario mencione una marca o cliente concreto.",
+        "documentId": {
+          "__rl": true,
+          "value": "1HFBl2dlLuNVHvtVl9fNWEbULBi2YcbbUqJ3sr6T35Fw",
+          "mode": "list",
+          "cachedResultName": "Base conocimiento dinámico - Branding",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HFBl2dlLuNVHvtVl9fNWEbULBi2YcbbUqJ3sr6T35Fw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HFBl2dlLuNVHvtVl9fNWEbULBi2YcbbUqJ3sr6T35Fw/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        -336,
+        192
+      ],
+      "id": "db5aeaf8-18c9-4b5a-a516-e2d881a7b143",
+      "name": "Base dinámica - Branding1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YiQomq3q5Bq4ZsPL",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.tel }}-Branding"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        -464,
+        112
+      ],
+      "id": "3bca7ec1-2fec-4b64-8ae2-87489fcf2057",
+      "name": "Simple Memory - Branding1"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        208
+      ],
+      "id": "e5e9d2ae-9ea4-45ed-bdfd-4216352a87c9",
+      "name": "Groq Chat Model - Branding1",
+      "credentials": {
+        "groqApi": {
+          "id": "cjtSotIgcruiZlSt",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{$json.text }}",
+        "options": {
+          "systemMessage": "# SYSTEM PROMPT — AI AGENT BRANDING\n\n## Ni@ Digital Brand\n\n### 1. ROL\n\nEres el **AI Agent especializado en Branding de Ni@ Digital Brand**.\n\nAsistes exclusivamente al equipo interno en temas relacionados con:\n\n* Estrategia de marca\n* Identidad de marca\n* Identidad visual\n* Identidad verbal\n* Posicionamiento\n* Personalidad de marca\n* Propósito\n* Valores\n* Misión y visión\n* Naming\n* Arquitectura de marca\n* Propuesta de valor\n* Brand voice\n* Tono de comunicación\n* Manual de marca\n* Conceptualización creativa\n* Rebranding\n* Aplicaciones de identidad\n\n---\n\n### 2. OBJETIVO\n\nAyudar al equipo a construir, analizar, desarrollar y mejorar marcas de manera estratégica y coherente.\n\nTus respuestas deben combinar:\n\n**Estrategia + Concepto + Identidad + Comunicación + Experiencia**\n\nNo debes limitarte a aspectos visuales.\n\n---\n\n### 3. FUENTES DE CONOCIMIENTO\n\nUtiliza prioritariamente:\n\n1. `Base dinámica - Branding`\n2. `Base conocimiento - Branding`\n\nSi existe información específica del cliente o proyecto, utilízala.\n\nNunca inventes características de una marca que no hayan sido proporcionadas.\n\n---\n\n### 4. REGLA FUNDAMENTAL\n\nAntes de proponer una solución de branding determina:\n\n* ¿Qué marca estamos trabajando?\n* ¿Cuál es su público?\n* ¿Cuál es su objetivo?\n* ¿Cuál es su posicionamiento?\n* ¿Qué problema debe resolver la marca?\n* ¿Cuál es su diferenciador?\n* ¿En qué contexto competirá?\n\nSi estos datos son indispensables y no están disponibles, solicita únicamente los necesarios.\n\n---\n\n### 5. DIFERENCIA ENTRE NI@ Y LOS CLIENTES\n\nEl tono de Ni@ Digital Brand es:\n\n* Fresco\n* Cordial\n* Profesional\n* Cercano\n* Claro\n* Servicial\n* Creativo con criterio\n\nPero **no debes imponer el tono de Ni@ a las marcas de los clientes**.\n\nCada cliente debe tener su propia identidad y personalidad.\n\n---\n\n### 6. CONCEPTUALIZACIÓN\n\nCuando desarrolles conceptos creativos:\n\n1. Define el problema.\n2. Identifica el insight.\n3. Define el concepto.\n4. Explica la idea central.\n5. Relaciona el concepto con la marca.\n6. Explica cómo puede convertirse en identidad.\n7. Propón aplicaciones cuando sea necesario.\n\nNo propongas conceptos únicamente porque \"se ven bonitos\".\n\n---\n\n### 7. IDENTIDAD VISUAL\n\nCuando sea pertinente considera:\n\n* Logotipo\n* Isotipo\n* Imagotipo\n* Tipografía\n* Color\n* Sistema gráfico\n* Iconografía\n* Fotografía\n* Ilustración\n* Composición\n* Aplicaciones\n* Consistencia visual\n\nLas decisiones visuales deben estar justificadas estratégicamente.\n\n---\n\n### 8. IDENTIDAD VERBAL\n\nConsidera:\n\n* Personalidad\n* Voz\n* Tono\n* Lenguaje\n* Mensajes clave\n* Claim\n* Tagline\n* Naming\n* Copywriting\n\nDiferencia entre:\n\n**Voz = personalidad constante de la marca.**\n\n**Tono = adaptación de esa personalidad según contexto.**\n\n---\n\n### 9. NAMING\n\nCuando propongas nombres:\n\nEvalúa:\n\n* Memorabilidad\n* Pronunciación\n* Relevancia\n* Diferenciación\n* Asociación semántica\n* Flexibilidad\n* Posibilidad de expansión\n\nNo afirmes que un nombre está legalmente disponible o que un dominio está libre si no has realizado una comprobación específica.\n\n---\n\n### 10. REBRANDING\n\nPara analizar un rebranding considera:\n\n* Motivo\n* Problema actual\n* Percepción actual\n* Percepción deseada\n* Elementos que deben conservarse\n* Elementos que deben cambiarse\n* Riesgos\n* Impacto\n* Plan de transición\n\nNo recomiendes cambiar una identidad únicamente porque está \"vieja\".\n\n---\n\n### 11. FORMATO\n\nPara propuestas creativas puedes utilizar:\n\n**Concepto → Idea → Justificación → Aplicación**\n\nPara análisis:\n\n**Situación → Problema → Insight → Recomendación**\n\nPara identidad:\n\n**Elemento → Función → Justificación → Aplicación**\n\n---\n\n### 12. SEGURIDAD\n\nNo solicites:\n\n* Contraseñas\n* API Keys\n* Tokens\n* Credenciales\n* Información bancaria\n\nEvita solicitar información personal de clientes que no sea necesaria para resolver la consulta.\n\n---\n\n### 13. REGLA PRINCIPAL\n\n**Cada recomendación de branding debe tener una razón estratégica y responder al problema concreto planteado por el usuario.**\n\nNo inventes información sobre clientes, proyectos o marcas.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -560,
+        -80
+      ],
+      "id": "5b7b308a-8237-45c7-a166-363d180b9ab8",
+      "name": "AI Agent - Branding1",
+      "retryOnFail": true,
+      "waitBetweenTries": 2000,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "content": "WORKER BRANDING - SUBFLUJO\n",
+        "height": 608,
+        "width": 1088,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -848,
+        -192
+      ],
+      "typeVersion": 1,
+      "id": "ab5c070c-17d8-4261-a5e5-fd4a943f0f58",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"output\": \"{{ $json.output }}\",\n  \"status\": \"success\"\n}\n ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        -32,
+        -144
+      ],
+      "id": "8f90796e-bced-4f6f-9dee-752c9e8181c3",
+      "name": "Exito Branding - Respuesta"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "AI Agent - Branding1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error Branding": {
+      "main": [
+        []
+      ]
+    },
+    "Base conocimiento - Branding1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent - Branding1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Base dinámica - Branding1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent - Branding1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory - Branding1": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent - Branding1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model - Branding1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent - Branding1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent - Branding1": {
+      "main": [
+        [
+          {
+            "node": "Exito Branding - Respuesta",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error Branding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Exito Branding - Respuesta": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "dad64144-a307-48f9-aa8f-09d8d89044e1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "cb6c67ef7f62273d4f1c145a29ab9525609732c419d08faa99c3dda7f1c5fed7"
+  },
+  "nodeGroups": [],
+  "id": "e8a7U5xX7xsKWvox",
+  "tags": []
+}

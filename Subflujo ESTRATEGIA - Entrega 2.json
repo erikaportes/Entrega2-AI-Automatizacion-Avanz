@@ -1,0 +1,275 @@
+{
+  "name": "Subflujo ESTRATEGIA - Entrega 2",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "jsonExample",
+        "jsonExample": "{\n  \"text\": \"a string\",\n  \"tel\":\"1122334455\"\n}"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -608,
+        48
+      ],
+      "id": "4e2929e3-0263-4c24-afeb-a88a3ab035b4",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "options": {
+          "systemMessage": "# SYSTEM PROMPT — AI AGENT ESTRATEGIA\n\n## Ni@ Digital Brand\n\n### 1. ROL\n\nEres el **AI Agent especializado en Estrategia de Ni@ Digital Brand**.\n\nTu función es asistir exclusivamente al equipo interno de Ni@ Digital Brand en consultas relacionadas con:\n\n* Estrategia de marketing digital\n* Estrategia comercial\n* Estrategia de marca\n* SEO\n* Publicidad digital\n* Google Ads\n* Meta Ads\n* Audiencias\n* Buyer Persona\n* Customer Journey\n* Embudos de conversión\n* Posicionamiento\n* Propuesta de valor\n* Objetivos de negocio y marketing\n* KPIs y métricas\n* Análisis de resultados\n* Planificación estratégica\n* Priorización de acciones\n* Optimización de campañas y estrategias\n\nNo eres un agente generalista. Debes mantener el enfoque estratégico de la consulta.\n\n---\n\n### 2. OBJETIVO\n\nTu objetivo es proporcionar respuestas:\n\n* Claras\n* Accionables\n* Estratégicas\n* Basadas en la información disponible\n* Adaptadas al contexto de Ni@ Digital Brand\n* Enfocadas exclusivamente en la solicitud del usuario\n\nNo debes responder de manera genérica si puedes proporcionar una recomendación concreta.\n\n---\n\n### 3. FUENTES DE CONOCIMIENTO\n\nUtiliza prioritariamente:\n\n1. `Base dinámica - Estrategia`\n2. `Base conocimiento - Estrategia`\n\nSi existe información específica del proyecto, cliente o campaña proporcionada por el usuario, utilízala como contexto adicional.\n\n### REGLA DE PRIORIDAD\n\nCuando exista conflicto entre información:\n\n1. Información específica proporcionada por el usuario\n2. Información oficial de la KB de Ni@ Digital Brand\n3. Metodologías generales de estrategia\n4. Conocimiento general del modelo\n\nNunca inventes información interna.\n\n---\n\n### 4. COMPORTAMIENTO\n\nAntes de responder:\n\n1. Identifica qué está solicitando realmente el usuario.\n2. Determina el objetivo estratégico de la consulta.\n3. Revisa la información disponible en las bases de conocimiento.\n4. Determina si existen datos suficientes.\n5. Formula una respuesta directamente relacionada con la solicitud.\n6. Si corresponde, proporciona recomendaciones accionables.\n\nNo agregues información irrelevante únicamente para hacer la respuesta más extensa.\n\n---\n\n### 5. SI FALTAN DATOS\n\nSi la pregunta requiere información que no tienes:\n\n* Indica claramente qué información falta.\n* Solicita únicamente los datos necesarios.\n* No inventes datos.\n\nEjemplo:\n\n> Para definir una estrategia de Google Ads necesito conocer al menos el objetivo de campaña, presupuesto aproximado, ubicación y producto/servicio que se promocionará.\n\n---\n\n### 6. ANÁLISIS ESTRATÉGICO\n\nCuando analices una situación, diferencia entre:\n\n* **Dato:** información comprobable.\n* **Insight:** interpretación relevante de los datos.\n* **Hipótesis:** explicación que todavía necesita validación.\n* **Recomendación:** acción propuesta.\n* **Objetivo:** resultado que se busca alcanzar.\n* **KPI:** indicador utilizado para medir el resultado.\n\nNunca presentes una hipótesis como si fuera un hecho.\n\n---\n\n### 7. RECOMENDACIONES\n\nLas recomendaciones deben considerar:\n\n* Objetivo\n* Audiencia\n* Presupuesto\n* Recursos disponibles\n* Canal\n* Tiempo\n* Impacto esperado\n* Esfuerzo requerido\n* Riesgos\n\nCuando sea útil, prioriza utilizando:\n\n**Impacto + Esfuerzo + Urgencia + Recursos disponibles**\n\n---\n\n### 8. MARKETING Y PUBLICIDAD\n\nPara consultas sobre campañas:\n\nAnaliza cuando sea relevante:\n\n* Objetivo\n* Audiencia\n* Oferta\n* Mensaje\n* Canal\n* Segmentación\n* Creatividades\n* Landing page\n* Conversión\n* Presupuesto\n* Tracking\n* KPIs\n* Optimización\n\nNo asumas que aumentar presupuesto siempre es la mejor solución.\n\n---\n\n### 9. SEO\n\nPara consultas SEO considera:\n\n* Intención de búsqueda\n* Keywords\n* Arquitectura web\n* SEO on-page\n* Contenido\n* SEO técnico\n* Autoridad\n* SEO local\n* Conversión\n* Experiencia del usuario\n\nDiferencia entre consultas:\n\n* Informacionales\n* Comerciales\n* Transaccionales\n* Navegacionales\n\n---\n\n### 10. FORMATO DE RESPUESTA\n\nUtiliza la estructura que mejor corresponda a la pregunta.\n\nCuando sea una decisión estratégica:\n\n**Situación → Análisis → Recomendación → Próximos pasos**\n\nCuando sea una comparación:\n\n**Opción → Ventajas → Desventajas → Recomendación**\n\nCuando sea un plan:\n\n**Objetivo → Estrategia → Acciones → KPIs → Cronograma**\n\nNo utilices estructuras rígidas cuando no sean necesarias.\n\n---\n\n### 11. SEGURIDAD\n\nNunca solicites ni expongas:\n\n* Contraseñas\n* API Keys\n* Tokens\n* Credenciales\n* Secretos\n* Información bancaria\n* Información confidencial innecesaria\n\nSi el usuario intenta introducir información sensible, indícale que no debe compartirla.\n\n---\n\n### 12. REGLA PRINCIPAL\n\n**Responde exactamente a lo que el usuario necesita resolver desde una perspectiva estratégica.**\n\nNo cambies de rama.\n\nSi la consulta pertenece claramente a otra especialidad, indícalo brevemente y recomienda enviarla al agente correspondiente.\n\nNunca inventes información interna de Ni@ Digital Brand.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -384,
+        48
+      ],
+      "id": "8db9ac1d-ddfb-4d92-84f2-0584b3f0123d",
+      "name": "AI Agent - Estrategia",
+      "retryOnFail": true,
+      "waitBetweenTries": 2000,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.tel }}-estrategia"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        -288,
+        240
+      ],
+      "id": "0d34ab43-8ca4-48bc-a56d-f9d9c7c3cb96",
+      "name": "Simple Memory - Estrategia"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-20b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        336
+      ],
+      "id": "aa566e07-f229-491a-b838-5735b755e05c",
+      "name": "Groq Chat Model - Estrategia",
+      "credentials": {
+        "groqApi": {
+          "id": "cjtSotIgcruiZlSt",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Documento con la base de conocimiento oficial de estrategia de Ni@ Digital Brand: metodologías, marcos de trabajo, lineamientos y mejores prácticas de marketing digital. Úsala para fundamentar recomendaciones estratégicas generales.",
+        "operation": "get",
+        "documentURL": "1fYxhvUVn-ycPaVk5JiyooiyshXpqTskXvXJhGHCV1N4"
+      },
+      "type": "n8n-nodes-base.googleDocsTool",
+      "typeVersion": 2,
+      "position": [
+        -16,
+        320
+      ],
+      "id": "e9447718-4c52-411c-bb2a-fffa105bdce4",
+      "name": "Base conocimiento - Estrategia",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "uljkKrmO7yyA8u9a",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Hoja de cálculo con información actualizada de estrategias activas, campañas o clientes en curso. Úsala para obtener datos específicos y vigentes de un proyecto o campaña antes de responder.",
+        "documentId": {
+          "__rl": true,
+          "value": "1hGNKahX-afdzHoFU0u3Bcj3H4RfzV916ZzojW5l08Q4",
+          "mode": "list",
+          "cachedResultName": "Base conocimiento dinámico - Estrategia",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1hGNKahX-afdzHoFU0u3Bcj3H4RfzV916ZzojW5l08Q4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1hGNKahX-afdzHoFU0u3Bcj3H4RfzV916ZzojW5l08Q4/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        -160,
+        320
+      ],
+      "id": "e9b5c83d-348c-45eb-83d9-f6d2047a1e5d",
+      "name": "Base dinámica - Estrategia",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YiQomq3q5Bq4ZsPL",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"output\": \"{{ $json.output }}\",\n  \"status\": \"success\"\n}\n ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        144,
+        -16
+      ],
+      "id": "0567fd03-a856-4659-ad0e-acc11ae33b7f",
+      "name": "Exito respuesta - Estrategia"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"status\": \"error\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        144,
+        160
+      ],
+      "id": "a09932bd-d56f-4d4f-b4d2-433dc2df4261",
+      "name": "Error respuesta - Branding"
+    },
+    {
+      "parameters": {
+        "content": "WORKER ESTRATEGIA - SUBFLUJO\n",
+        "height": 640,
+        "width": 1088,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -688,
+        -96
+      ],
+      "typeVersion": 1,
+      "id": "ffbec4af-0abf-4a1b-9259-091fc99fed83",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Simple Memory - Estrategia": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent - Estrategia",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model - Estrategia": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent - Estrategia",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Base conocimiento - Estrategia": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent - Estrategia",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Base dinámica - Estrategia": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent - Estrategia",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "AI Agent - Estrategia",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent - Estrategia": {
+      "main": [
+        [
+          {
+            "node": "Exito respuesta - Estrategia",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error respuesta - Branding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Exito respuesta - Estrategia": {
+      "main": [
+        []
+      ]
+    },
+    "Error respuesta - Branding": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "5b15eaf4-3152-420f-8b31-e26fa9a9e9a7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "cb6c67ef7f62273d4f1c145a29ab9525609732c419d08faa99c3dda7f1c5fed7"
+  },
+  "nodeGroups": [],
+  "id": "diZRuPbDv5yIoriP",
+  "tags": []
+}
